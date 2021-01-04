@@ -1,5 +1,6 @@
 from mesa import Agent
 import numpy as np
+from random import randrange
 
 class Person(Agent):
     """ An agent with fixed initial wealth."""
@@ -11,6 +12,9 @@ class Person(Agent):
         self.in_quarantine = False
         self.in_lockdown = False
         self.time_infected = 0
+        self.age = randrange(1, 100)
+        self.has_underlying_medical_condition = randrange(0, 2) == 1
+        self.sex = 'M' if randrange(0, 2) == 1 else 'F'
 
     def move_to_next(self):
         ''' Move to next adjacent cell '''
@@ -52,7 +56,7 @@ class Person(Agent):
         if not self.in_quarantine:
             self.infect_others()  # infect others in same cell
         if self.time_infected < self.model.recovery_period:
-            if self.random.random() < self.model.mortality_rate:
+            if self.random.random() < self.model.mortality_rate(self) / self.model.recovery_period:
                 self.alive = False  # person died from infection
         else:  # person has passed the recovery period so no longer infected
             self.infected = False

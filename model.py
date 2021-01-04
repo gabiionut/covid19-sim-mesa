@@ -37,7 +37,7 @@ class Simulation(Model):
         self.start_infected = params.get('initial_infected')
         self.recovery_period = params.get('recovery_period')
         self.infect_rate = params.get('infect_rate')
-        self.mortality_rate = params.get('mortality_rate') / self.recovery_period
+        self.mortality_rate = params.get('mortality_rate')
         self.active_ratio = params.get('active_ratio')
         self.immunity_chance = params.get('immunity_chance')
         self.quarantine_rate = params.get('quarantine_rate')
