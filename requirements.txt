@@ -1,5 +1,0 @@
-itertools
-mesa
-numpy
-pandas
-matplotlib

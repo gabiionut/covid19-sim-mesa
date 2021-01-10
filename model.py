@@ -3,8 +3,6 @@ from mesa.time import RandomActivation
 from person import Person
 from mesa.space import MultiGrid
 from mesa.datacollection import DataCollector
-import numpy as np
-import matplotlib.pyplot as plt
 
 def total_infected(model):
     total = 0
@@ -29,8 +27,7 @@ def total_immune(model):
 
 class Simulation(Model):
     """A model with some number of agents."""
-    def __init__(self, params, seed=None):
-        #self.num_agents = params.get('num_persons')
+    def __init__(self, params,):
         self.num_agents = int(params.get('density') * params.get('grid_x') * params.get('grid_y'))
         self.grid = MultiGrid(params.get('grid_x'), params.get('grid_y'), True)
         self.schedule = RandomActivation(self)

@@ -1,5 +1,4 @@
 from mesa import Agent
-import numpy as np
 from random import randrange
 
 class Person(Agent):
@@ -58,6 +57,7 @@ class Person(Agent):
         if self.time_infected < self.model.recovery_period:
             if self.random.random() < self.model.mortality_rate(self) / self.model.recovery_period:
                 self.alive = False  # person died from infection
+                self.infected = False # dead person no longer counts as infected
         else:  # person has passed the recovery period so no longer infected
             self.infected = False
             if self.random.random() < self.model.immunity_chance:

@@ -4,7 +4,11 @@ from mesa.visualization.modules import ChartModule
 
 from model import Simulation
 
-from run import sim_params
+from run import sim_params_ebola
+from run import sim_params_mers
+from run import sim_params_covid
+
+import argparse
 
 def agent_portrayal(agent):
     portrayal = {"Shape": "circle",
@@ -29,6 +33,21 @@ def agent_portrayal(agent):
         portrayal["Layer"] = 0
 
     return portrayal
+# Construct the argument parser
+ap = argparse.ArgumentParser()
+ap.add_argument("-v", "--virus", required=False, help="virus type")
+args = ap.parse_args()
+
+if args.virus == 'covid':
+    sim_params = sim_params_covid
+else :
+    if args.virus == 'ebola':
+        sim_params = sim_params_ebola
+    else:
+        if args.virus == 'mers':
+            sim_params = sim_params_mers
+        else:
+            sim_params = sim_params_covid
 
 grid = CanvasGrid(
     agent_portrayal,
